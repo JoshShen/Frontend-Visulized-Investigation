@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    var posList = [
+        'left', 'right', 'top', 'bottom',
+        'inside',
+        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+    ];
+
+    app.configParameters = {
+        rotate: {
+            min: -90,
+            max: 90
+        },
+        align: {
+            options: {
+                left: 'left',
+                center: 'center',
+                right: 'right'
+            }
+        },
+        verticalAlign: {
+            options: {
+                top: 'top',
+                middle: 'middle',
+                bottom: 'bottom'
+            }
+        },
+        position: {
+            options: echarts.util.reduce(posList, function (map, pos) {
+                map[pos] = pos;
+                return map;
+            }, {})
+        },
+        distance: {
+            min: 0,
+            max: 100
+        }
+    };
+
+    app.config = {
+        rotate: 0,
+        align: 'center',
+        verticalAlign: 'middle',
+        position: 'top',
+        distance: 10,
+        onChange: function () {
+            var labelOption = {
+                normal: {
+                    rotate: app.config.rotate,
+                    align: app.config.align,
+                    verticalAlign: app.config.verticalAlign,
+                    position: app.config.position,
+                    distance: app.config.distance
+                }
+            };
+            myChart.setOption({
+                series: [{
+                    label: labelOption
+                }, {
+                    label: labelOption
+                }, {
+                    label: labelOption
+                }, {
+                    label: labelOption
+                }]
+            });
+        }
+    };
+
+
+    var labelOption = {
+        normal: {
+            show: true,
+            position: app.config.position,
+            distance: app.config.distance,
+            align: app.config.align,
+            verticalAlign: app.config.verticalAlign,
+            rotate: app.config.rotate,
+            formatter: '{c}',
+            fontSize: 16,
+            rich: {
+                name: {
+                    textBorderColor: '#fff'
+                }
+            }
+        }
+    };
+
+    option = {
+        title:{
+                text:'Revenue by User Geography',
+            x:'center',
+            align:'right',
+            show:true
+        },
+        color: ['#20284C', '#303F74', '#7E93CD', '#A9B6DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['US & Canada', 'Europe', 'Asia', 'Rest of World'],
+            top:'100',
+            left:'300',
+            orient:'vertical'
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: ['Q2\'11', 'Q3\'11', 'Q4\'11', 'Q1\'12', 'Q2\'12','Q3\'12','Q4\'12','Q1\'13','Q2\'13']
+            }
+        ],
+        yAxis: [
+            {
+                show: true,
+                name:'In Millions'
+            }
+        ],
+        series: [
+            {
+                name: 'US & Canada',
+                type: 'bar',
+                barGap: 0,
+                label: labelOption,
+                data: [471, 482, 567, 525, 590, 637, 780, 679, 848]
+            },
+            {
+                name: 'Europe',
+                type: 'bar',
+                label: labelOption,
+                data: [275, 290, 361, 328, 346, 341, 440, 423, 505]
+            },
+            {
+                name: 'Asia',
+                type: 'bar',
+                label: labelOption,
+                data: [82, 104, 115, 118, 135, 154, 198, 197, 247]
+            },
+            {
+                name: 'Rest of World',
+                type: 'bar',
+                label: labelOption,
+                data: [65, 78, 87, 87, 113, 130, 167, 159, 213]
+            }
+        ]
+    };;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <title>美国科技三巨头女性员工比例</title>
+    <style>::-webkit-scrollbar{display:none;}html,body{overflow:hidden;height:100%;margin:0;}</style>
+</head>
+<body>
+<div id="mountNode"></div>
+<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+<script>
+    var data =  [{
+        region: "US & Canada",
+        quart: "Q2'11",
+        revenue: 471
+    }, {
+        region: "US & Canada",
+        quart: "Q3'11",
+        revenue: 482
+    }, {
+        region: "US & Canada",
+        quart: "Q4'11",
+        revenue: 567
+    }, {
+        region: "US & Canada",
+        quart: "Q1'12",
+        revenue: 525
+    }, {
+        region: "US & Canada",
+        quart: "Q2'12",
+        revenue: 590
+    }, {
+        region: "US & Canada",
+        quart: "Q3'12",
+        revenue: 637
+    }, {
+        region: "US & Canada",
+        quart: "Q4'12",
+        revenue: 780
+    }, {
+        region: "US & Canada",
+        quart: "Q1'13",
+        revenue: 679
+    }, {
+        region: "US & Canada",
+        quart: "Q2'13",
+        revenue: 848
+    }, {
+        region: "Europe",
+        quart: "Q2'11",
+        revenue: 275
+    }, {
+        region: "Europe",
+        quart: "Q3'11",
+        revenue: 290
+    }, {
+        region: "Europe",
+        quart: "Q4'11",
+        revenue: 361
+    }, {
+        region: "Europe",
+        quart: "Q1'12",
+        revenue: 328
+    }, {
+        region: "Europe",
+        quart: "Q2'12",
+        revenue: 346
+    }, {
+        region: "Europe",
+        quart: "Q3'12",
+        revenue: 341
+    }, {
+        region: "Europe",
+        quart: "Q4'12",
+        revenue: 440
+    }, {
+        region: "Europe",
+        quart: "Q1'13",
+        revenue: 423
+    }, {
+        region: "Europe",
+        quart: "Q2'13",
+        revenue: 505
+    }, {
+        region: "Asia",
+        quart: "Q2'11",
+        revenue: 82
+    }, {
+        region: "Asia",
+        quart: "Q3'11",
+        revenue: 104
+    }, {
+        region: "Asia",
+        quart: "Q4'11",
+        revenue: 115
+    }, {
+        region: "Asia",
+        quart: "Q1'12",
+        revenue: 118
+    }, {
+        region: "Asia",
+        quart: "Q2'12",
+        revenue: 135
+    }, {
+        region: "Asia",
+        quart: "Q3'12",
+        revenue: 154
+    }, {
+        region: "Asia",
+        quart: "Q4'12",
+        revenue: 198
+    }, {
+        region: "Asia",
+        quart: "Q1'13",
+        revenue: 197
+    }, {
+        region: "Asia",
+        quart: "Q2'13",
+        revenue: 247
+    }, {
+        region: "Rest of World",
+        quart: "Q2'11",
+        revenue: 65
+    }, {
+        region: "Rest of World",
+        quart: "Q3'11",
+        revenue: 78
+    }, {
+        region: "Rest of World",
+        quart: "Q4'11",
+        revenue: 87
+    }, {
+        region: "Rest of World",
+        quart: "Q1'12",
+        revenue: 87
+    }, {
+        region: "Rest of World",
+        quart: "Q2'12",
+        revenue: 113
+    }, {
+        region: "Rest of World",
+        quart: "Q3'12",
+        revenue: 130
+    }, {
+        region: "Rest of World",
+        quart: "Q4'12",
+        revenue: 167
+    }, {
+        region: "Rest of World",
+        quart: "Q1'13",
+        revenue: 159
+    }, {
+        region: "Rest of World",
+        quart: "Q2'13",
+        revenue: 213
+    }];
+    var chart = new G2.Chart({
+        container: 'mountNode',
+        forceFit: true,
+        height: window.innerHeight,
+        padding: 'auto'
+    });
+    chart.source(data);
+    chart.scale('revenue', {
+        alias: 'In Million',
+        max:800,
+        min: 0,
+        tickCount: 4
+    });
+    chart.axis('region', {
+        label: {
+            textStyle: {
+                fill: '#aaaaaa'
+            }
+        },
+        tickLine: {
+            alignWithLabel: false,
+            length: 0
+        }
+    });
+
+    chart.axis('quart', {
+        label: {
+            textStyle: {
+                fill: '#aaaaaa'
+            }
+        },
+        title: {
+            offset: 50
+        }
+    });l
+    chart.legend({
+        position: 'top-left',
+        layout:'vertical',
+        offsetX:150,
+        custom:true,
+        items:[
+            { value: 'US & Canada', marker: {symbol: 'square', fill: '#20284C'} },
+            { value: 'Europe', marker: {symbol: 'square', fill: '#303F74'} },
+            { value: 'Asia', marker: {symbol: 'square', fill: '#7E93CD'} },
+            { value: 'Rest of World', marker: {symbol: 'square', fill: '#A9B6DB'} },
+        ]
+    });
+    chart.interval().position('quart*revenue').color('region',['#20284C','#303F74','#7E93CD','#A9B6DB']).opacity(1).adjust([{
+        type: 'dodge',
+        marginRatio: 1 / 32
+    }]);
+    chart.render();
+</script></body>
+</html>
